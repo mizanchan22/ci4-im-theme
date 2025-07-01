@@ -37,8 +37,9 @@ class ThemeInstall extends BaseCommand
     {
         CLI::newLine();
         CLI::write("Tema Bootstrap 5:", 'cyan');
-        CLI::write("1. AdminLTE", 'white');
-        CLI::write("2. NiceAdmin", 'white');
+        CLI::write("1. AdminLTE (on progress)", 'white');
+        CLI::write("2. NiceAdmin (soon)", 'white');
+        CLI::write("3. Sneat (on progress)", 'white');
         CLI::newLine();
 
         $choice = CLI::prompt("Pilih tema (1-2)");
@@ -46,6 +47,7 @@ class ThemeInstall extends BaseCommand
         $themeMap = [
             '1' => 'adminlte',
             '2' => 'niceadmin',
+            '3' => 'sneat',
         ];
 
         if (!isset($themeMap[$choice])) {
