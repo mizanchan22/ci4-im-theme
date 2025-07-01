@@ -61,22 +61,26 @@ class ThemeInstall extends BaseCommand
     {
         $vendorPath    = ROOTPATH . 'vendor/mizanchan22/ci4-im-theme/stubs/';
         $sourceViews   = $vendorPath . "views/layout_files/" . $themeKey;
-        $sourceAssets  = $vendorPath . "public/assets/" . $themeKey . "/css";
+        $sourceAssetsCSS  = $vendorPath . "public/assets/" . $themeKey . "/css";
+        $sourceAssetsJS  = $vendorPath . "public/assets/" . $themeKey . "/js";
 
         $targetViews   = APPPATH . 'Views/layouts/';
-        $targetAssets  = FCPATH . 'assets/css/';
+        $targetAssetsCSS  = FCPATH . 'assets/css/';
+        $targetAssetsJS  = FCPATH . 'assets/js/';
 
         $this->recreateFolder($targetViews);
-        $this->recreateFolder($targetAssets);
+        $this->recreateFolder($targetAssetsCSS);
+        $this->recreateFolder($targetAssetsJS);
 
         $this->copyDirectory($sourceViews, $targetViews);
-        $this->copyDirectory($sourceAssets, $targetAssets);
+        $this->copyDirectory($sourceAssets, $targetAssetsCSS, $targetAssetsJS);
 
         CLI::newLine();
         CLI::write("✅ Tema '$themeKey' telah dipasang ke projek CI4 anda.", 'green');
         CLI::newLine();
         CLI::write("📁 Layouts: " . realpath($targetViews), 'blue');
-        CLI::write("📁 Assets:  " . realpath($targetAssets), 'blue');
+        CLI::write("📁 Assets CSS:  " . realpath($targetAssetsCSS), 'blue');
+        CLI::write("📁 Assets JS:  " . realpath($targetAssetsJS), 'blue');
         CLI::newLine(2);
     }
 
