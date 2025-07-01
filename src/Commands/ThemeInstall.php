@@ -27,7 +27,7 @@ class ThemeInstall extends BaseCommand
             $themeKey = strtolower($selected);
             $vendorPath = ROOTPATH . 'vendor/mizanchan22/ci4-im-theme/stubs/';
             $sourceViews = $vendorPath . "views/layout_files/" . $themeKey;
-            $sourceAssets = $vendorPath . "public/assets/css";
+            $sourceAssets = $vendorPath . "public/assets/". $themeKey ."/css";
 
             $targetViews = APPPATH . 'Views/layouts/';
             $targetAssets = FCPATH . 'assets/css/';
@@ -41,6 +41,7 @@ class ThemeInstall extends BaseCommand
             CLI::write("✅ Tema '$selected' telah dipasang ke projek CI4 anda.", 'green');
             CLI::write("📁 Layouts: file://" . str_replace('\\\\', '/', realpath($targetViews)));
             CLI::write("📁 Assets:  file://" . str_replace('\\\\', '/', realpath($targetAssets)));
+             CLI::write("\n");
         }
     }
 
