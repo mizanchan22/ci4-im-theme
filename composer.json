@@ -1,0 +1,21 @@
+{
+    "name": "mizanchan22/ci4-im-theme",
+    "description": "CI4 Theme Installer with Spark Command",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IM1\\Installer\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/console": "^6.0"
+    },
+    "extra": {
+        "codeigniter4": {
+            "commands": {
+                "im1:theme": "IM1\\Installer\\Commands\\ThemeInstall"
+            }
+        }
+    }
+}
