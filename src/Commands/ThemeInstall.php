@@ -73,7 +73,8 @@ class ThemeInstall extends BaseCommand
         $this->recreateFolder($targetAssetsJS);
 
         $this->copyDirectory($sourceViews, $targetViews);
-        $this->copyDirectory($sourceAssets, $targetAssetsCSS, $targetAssetsJS);
+        $this->copyDirectory($sourceAssetsCSS, $targetAssetsCSS);
+        $this->copyDirectory($sourceAssetsJS, $targetAssetsJS);
 
         CLI::newLine();
         CLI::write("✅ Tema '$themeKey' telah dipasang ke projek CI4 anda.", 'green');
