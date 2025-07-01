@@ -15,7 +15,7 @@ class ThemeInstall extends BaseCommand
     {
         CLI::newLine();
         CLI::write(str_repeat('*', 100), 'light_green');
-        CLI::write(str_pad('IM1 R&D Team', 100, ' ', STR_PAD_BOTH), 'yellow');
+        CLI::write(str_pad('IM1 R&D Composer CI4 Themes', 100, ' ', STR_PAD_BOTH), 'yellow');
         CLI::write(str_repeat('*', 100), 'light_green');
         CLI::newLine();
 
