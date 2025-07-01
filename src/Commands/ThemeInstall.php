@@ -76,6 +76,10 @@ class ThemeInstall extends BaseCommand
         $this->copyDirectory($sourceAssetsCSS, $targetAssetsCSS);
         $this->copyDirectory($sourceAssetsJS, $targetAssetsJS);
 
+        $this->updateBaseController();
+        $this->replaceWelcomeMessage();
+
+
         CLI::newLine();
         CLI::write("✅ Tema '$themeKey' telah dipasang ke projek CI4 anda.", 'green');
         CLI::newLine();
@@ -135,4 +139,64 @@ class ThemeInstall extends BaseCommand
 
         rmdir($dir);
     }
+
+    protected function updateBaseController(): void
+    {
+        $file = APPPATH . 'Controllers/BaseController.php';
+
+        if (!file_exists($file)) {
+            CLI::error("❌ BaseController.php tidak dijumpai.");
+            return;
+        }
+
+        $original = "protected \$helpers = [];";
+        $replacement = "protected \$helpers = ['html', 'form', 'date'];";
+
+        $content = file_get_contents($file);
+
+        if (strpos($content, $replacement) !== false) {
+            CLI::write("ℹ️  BaseController.php sudah dikemaskini sebelum ini.", 'yellow');
+            return;
+        }
+
+        if (strpos($content, $original) === false) {
+            CLI::error("❌ Gagal cari line helpers dalam BaseController.php");
+            return;
+        }
+
+        $updated = str_replace($original, $replacement, $content);
+        file_put_contents($file, $updated);
+
+        CLI::write("✅ BaseController.php dikemaskini dengan helper ['html', 'form', 'date']", 'green');
+    }
+
+
+        protected function replaceWelcomeMessage(): void
+        {
+            $file = APPPATH . 'Views/welcome_message.php';
+
+            if (!file_exists($file)) {
+                CLI::error("❌ welcome_message.php tidak dijumpai.");
+                return;
+            }
+
+            $newContent = <<<PHP
+        <?= \$this->extend('layouts/main_layout') ?>
+<?= \$this->section('app-wrapper') ?>
+
+<!-- app wrapper -->
+<div class="app-wrapper">
+    <!-- Content -->
+    DaH JADI INStall themes
+    <!-- / Content -->
+</div>
+<!-- Content wrapper -->
+
+<?= \$this->endSection() ?>
+PHP;
+
+file_put_contents($file, $newContent);
+CLI::write("✅ welcome_message.php digantikan dengan template layout.", 'green');
+}
+
 }
